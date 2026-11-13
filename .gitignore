@@ -1,0 +1,14 @@
+﻿# Respaldos del desarrollo
+*-antes-*.js
+*-antes-*.html
+*-respaldo.js
+
+# Versiones anteriores
+main-paso*.js
+pieces-paso*.js
+demo-original.html
+
+# Archivos locales
+.vscode/
+.DS_Store
+Thumbs.db

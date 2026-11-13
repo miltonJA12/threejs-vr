@@ -1,66 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f2424">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-    <title>Experiencia de Realidad Virtual - Milton</title>
+    <title>Laboratorio VR | Ensamblaje tridimensional</title>
 
     <meta name="description"
-          content="Experiencia de realidad virtual con cubos interactivos y seguimiento de manos para Meta Quest 3.">
+          content="Laboratorio virtual de manipulacion y ensamblaje tridimensional mediante seguimiento de manos y WebXR.">
 
-    <meta name="theme-color" content="#444444">
+    <link rel="icon" type="image/svg+xml"
+          href="./assets/favicon.svg">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #444444;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        #info {
-            position: absolute;
-            top: 10px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: white;
-            z-index: 10;
-            font-size: 14px;
-            pointer-events: none;
-        }
-
-        #info a {
-            color: #ffff00;
-            font-weight: bold;
-            text-decoration: none;
-            pointer-events: auto;
-        }
-
-        #VRButton {
-            z-index: 20 !important;
-            font-family: Arial, sans-serif !important;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
 
     <script type="importmap">
     {
@@ -70,992 +27,208 @@
         }
     }
     </script>
-
 </head>
 
 <body>
 
+    <!-- PORTADA -->
+    <main id="welcomeScreen" class="editorial-welcome">
+
+        <div class="editorial-layout container">
+
+            <header class="editorial-header">
+                <div class="editorial-brand">
+                    <span class="editorial-brand-mark">M.</span>
+                    <span>
+                        LABORATORIO<br>
+                        <strong>INMERSIVO</strong>
+                    </span>
+                </div>
+
+                <span class="editorial-edition">
+                    PRACTICA 3.1 / 2026
+                </span>
+            </header>
+
+            <section class="editorial-hero row align-items-center g-5">
+
+                <div class="col-lg-7">
+
+                    <p class="editorial-label">
+                        DESARROLLO DE SOLUCIONES EN AMBIENTES VIRTUALES
+                    </p>
+
+                    <h1>
+                        Experimenta.<br>
+                        Manipula.<br>
+                        <em>Construye.</em>
+                    </h1>
+
+                    <p class="editorial-description">
+                        Un espacio de aprendizaje inmersivo para
+                        explorar la manipulacion y el ensamblaje
+                        de objetos tridimensionales mediante
+                        seguimiento de manos.
+                    </p>
+
+                    <button
+                        id="enterLab"
+                        class="editorial-button"
+                        type="button">
+                        EXPLORAR LABORATORIO
+                        <span aria-hidden="true">&#8594;</span>
+                    </button>
+
+                    <p class="editorial-compatibility">
+                        Diseñado para Meta Quest 3
+                        <span class="editorial-separator">/</span>
+                        Three.js + WebXR
+                    </p>
+
+                </div>
+
+                <div class="col-lg-5">
+
+                    <div class="editorial-feature">
+
+                        <div class="editorial-feature-top">
+                            <span>01 — 05</span>
+                            <span>ENSAMBLAJE 3D</span>
+                        </div>
+
+                        <div class="editorial-shapes" aria-hidden="true">
+                            <span class="editorial-shape cube"></span>
+                            <span class="editorial-shape sphere"></span>
+                            <span class="editorial-shape pyramid"></span>
+                        </div>
+
+                        <div class="editorial-feature-bottom">
+                            <strong>05</strong>
+                            <p>
+                                Piezas geométricas.<br>
+                                Cinco destinos.<br>
+                                Un desafío.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="editorial-guide row g-4">
+
+                <div class="col-lg-4">
+
+                    <div class="editorial-section-heading">
+                        <span>01 / EXPERIENCIA</span>
+                        <h2>Aprender haciendo.</h2>
+                    </div>
+
+                    <p class="editorial-guide-description">
+                        Cada pieza tiene un destino específico.
+                        El objetivo es completar el ensamblaje
+                        con precisión utilizando las manos.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-8">
+
+                    <div class="editorial-instructions">
+
+                        <div class="editorial-instruction">
+                            <span>01</span>
+                            <p>Accede al laboratorio y activa el modo VR.</p>
+                        </div>
+
+                        <div class="editorial-instruction">
+                            <span>02</span>
+                            <p>Acerca una mano a la pieza que deseas mover.</p>
+                        </div>
+
+                        <div class="editorial-instruction">
+                            <span>03</span>
+                            <p>Realiza una pinza para seleccionar y arrastrar.</p>
+                        </div>
+
+                        <div class="editorial-instruction">
+                            <span>04</span>
+                            <p>Suelta la pieza sobre su destino correspondiente.</p>
+                        </div>
+
+                        <div class="editorial-instruction">
+                            <span>05</span>
+                            <p>Completa el reto y consulta tu progreso.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <footer class="editorial-footer">
+
+                <div class="editorial-footer-main">
+                    <div>
+                        <span class="editorial-footer-label">
+                            DESARROLLADO POR
+                        </span>
+                        <strong>Milton Juarez Austria</strong>
+                    </div>
+
+                    <div>
+                        <span class="editorial-footer-label">
+                            INSTITUCION
+                        </span>
+                        <strong>
+                            Tecnológico Nacional de México<br>
+                            Campus Pachuca
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span class="editorial-footer-label">
+                            PROGRAMA ACADEMICO
+                        </span>
+                        <strong>
+                            Ingeniería en Tecnologías de la
+                            Información y Comunicaciones
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="editorial-footer-bottom">
+                    <span>PROYECTO ACADEMICO · 2026</span>
+                    <span>THREE.JS / WEBXR / BOOTSTRAP 5</span>
+                </div>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+    <!-- INFORMACION DEL LABORATORIO -->
     <div id="info">
         <a href="https://threejs.org"
            target="_blank"
            rel="noopener noreferrer">three.js</a>
-        | Experiencia de Realidad Virtual - Milton
+        | Laboratorio VR - Ensamblaje 3D
     </div>
 
-    <script type="module">
+    <!-- MOTOR ORIGINAL THREE.JS + WEBXR -->
+    <script type="module" src="./js/main.js"></script>
 
-        import * as THREE from 'three';
-
-        import { VRButton }
-            from 'three/addons/webxr/VRButton.js';
-
-        import { XRControllerModelFactory }
-            from 'three/addons/webxr/XRControllerModelFactory.js';
-
-        import { OculusHandModel }
-            from 'three/addons/webxr/OculusHandModel.js';
-
-        import { OculusHandPointerModel }
-            from 'three/addons/webxr/OculusHandPointerModel.js';
-
-        import { createText }
-            from 'three/addons/webxr/Text2D.js';
-
-
-        // ==========================================
-        // VARIABLES PRINCIPALES
-        // ==========================================
-
-        let camera;
-        let scene;
-        let renderer;
-
-        let menuMesh;
-        let instructionText;
-
-        let controllers;
-        let handPointers;
-
-        let needsCalibration = true;
-
-        const intersectables = [];
-        const buttons = [];
-        const draggables = [];
-
-
-        // ==========================================
-        // INICIAR EXPERIENCIA
-        // ==========================================
-
-        init();
-
-
-        // ==========================================
-        // CREAR BOTONES 3D
-        // ==========================================
-
-        function makeButtonMesh(x, y, z, color) {
-
-            const geometry = new THREE.BoxGeometry(
-                x, y, z
-            );
-
-            const material = new THREE.MeshPhongMaterial({
-                color: color
+    <!-- TRANSICION DE LA PORTADA -->
+    <script>
+        document.getElementById('enterLab')
+            .addEventListener('click', function () {
+                document.getElementById('welcomeScreen').hidden = true;
             });
-
-            return new THREE.Mesh(
-                geometry,
-                material
-            );
-
-        }
-
-
-        // ==========================================
-        // TRADUCIR BOTÓN DE WEBXR
-        // ==========================================
-
-        function traducirBotonVR(boton) {
-
-            const traducciones = {
-                'ENTER VR': 'ENTRAR A RV',
-                'EXIT VR': 'SALIR DE RV',
-                'VR NOT SUPPORTED': 'RV NO COMPATIBLE',
-                'VR NOT AVAILABLE': 'RV NO DISPONIBLE',
-                'VR NOT ALLOWED': 'RV NO PERMITIDA',
-                'WEBXR NOT AVAILABLE': 'WEBXR NO DISPONIBLE'
-            };
-
-            function actualizarTexto() {
-
-                const textoActual = boton.textContent.trim();
-
-                const traduccion = traducciones[textoActual];
-
-                if (
-                    traduccion &&
-                    textoActual !== traduccion
-                ) {
-                    boton.textContent = traduccion;
-                }
-
-            }
-
-            actualizarTexto();
-
-            const observer = new MutationObserver(
-                actualizarTexto
-            );
-
-            observer.observe(boton, {
-                childList: true,
-                characterData: true,
-                subtree: true
-            });
-
-        }
-
-
-        // ==========================================
-        // CONFIGURACIÓN GENERAL
-        // ==========================================
-
-        function init() {
-
-            const container = document.createElement('div');
-
-            document.body.appendChild(container);
-
-
-            // ESCENA
-
-            scene = new THREE.Scene();
-
-            scene.background = new THREE.Color(
-                0x444444
-            );
-
-
-            // CÁMARA
-
-            camera = new THREE.PerspectiveCamera(
-                50,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                10
-            );
-
-            camera.position.set(
-                0,
-                1.2,
-                0.3
-            );
-
-
-            // ILUMINACIÓN AMBIENTAL
-
-            scene.add(
-                new THREE.HemisphereLight(
-                    0xcccccc,
-                    0x999999,
-                    3
-                )
-            );
-
-
-            // ILUMINACIÓN DIRECCIONAL
-
-            const light = new THREE.DirectionalLight(
-                0xffffff,
-                3
-            );
-
-            light.position.set(
-                0,
-                6,
-                0
-            );
-
-            light.castShadow = true;
-
-            light.shadow.camera.top = 2;
-            light.shadow.camera.bottom = -2;
-            light.shadow.camera.right = 2;
-            light.shadow.camera.left = -2;
-
-            light.shadow.mapSize.set(
-                4096,
-                4096
-            );
-
-            scene.add(light);
-
-
-            // ======================================
-            // RENDERIZADOR
-            // ======================================
-
-            renderer = new THREE.WebGLRenderer({
-                antialias: true
-            });
-
-            renderer.setPixelRatio(
-                Math.min(window.devicePixelRatio, 2)
-            );
-
-            renderer.setSize(
-                window.innerWidth,
-                window.innerHeight
-            );
-
-            renderer.shadowMap.enabled = true;
-
-            renderer.xr.enabled = true;
-
-            renderer.xr.cameraAutoUpdate = false;
-
-            renderer.setAnimationLoop(animate);
-
-            container.appendChild(
-                renderer.domElement
-            );
-
-
-            // ======================================
-            // CONFIGURACIÓN WEBXR
-            // ======================================
-
-            const sessionInit = {
-                requiredFeatures: [
-                    'hand-tracking'
-                ]
-            };
-
-            const botonVR = VRButton.createButton(
-                renderer,
-                sessionInit
-            );
-
-            document.body.appendChild(botonVR);
-
-            traducirBotonVR(botonVR);
-
-            renderer.xr.addEventListener(
-                'sessionstart',
-                function () {
-                    needsCalibration = true;
-                }
-            );
-
-            renderer.xr.addEventListener(
-                'sessionend',
-                function () {
-                    needsCalibration = true;
-                }
-            );
-
-
-            // ======================================
-            // CONTROLADORES
-            // ======================================
-
-            const controller1 = renderer.xr.getController(0);
-
-            scene.add(controller1);
-
-            const controller2 = renderer.xr.getController(1);
-
-            scene.add(controller2);
-
-            const controllerModelFactory =
-                new XRControllerModelFactory();
-
-
-            // ======================================
-            // MANO IZQUIERDA
-            // ======================================
-
-            const controllerGrip1 =
-                renderer.xr.getControllerGrip(0);
-
-            controllerGrip1.add(
-                controllerModelFactory.createControllerModel(
-                    controllerGrip1
-                )
-            );
-
-            scene.add(controllerGrip1);
-
-            const hand1 = renderer.xr.getHand(0);
-
-            hand1.add(
-                new OculusHandModel(hand1)
-            );
-
-            const handPointer1 =
-                new OculusHandPointerModel(
-                    hand1,
-                    controller1
-                );
-
-            hand1.add(handPointer1);
-
-            scene.add(hand1);
-
-
-            // ======================================
-            // MANO DERECHA
-            // ======================================
-
-            const controllerGrip2 =
-                renderer.xr.getControllerGrip(1);
-
-            controllerGrip2.add(
-                controllerModelFactory.createControllerModel(
-                    controllerGrip2
-                )
-            );
-
-            scene.add(controllerGrip2);
-
-            const hand2 = renderer.xr.getHand(1);
-
-            hand2.add(
-                new OculusHandModel(hand2)
-            );
-
-            const handPointer2 =
-                new OculusHandPointerModel(
-                    hand2,
-                    controller2
-                );
-
-            hand2.add(handPointer2);
-
-            scene.add(hand2);
-
-
-            controllers = [
-                controllerGrip1,
-                controllerGrip2
-            ];
-
-            handPointers = [
-                handPointer1,
-                handPointer2
-            ];
-
-
-            // ======================================
-            // SUELO
-            // ======================================
-
-            const floorGeometry =
-                new THREE.PlaneGeometry(4, 4);
-
-            const floorMaterial =
-                new THREE.MeshPhongMaterial({
-                    color: 0x222222
-                });
-
-            const floor = new THREE.Mesh(
-                floorGeometry,
-                floorMaterial
-            );
-
-            floor.rotation.x = -Math.PI / 2;
-
-            floor.receiveShadow = true;
-
-            scene.add(floor);
-
-
-            // ======================================
-            // MENÚ FLOTANTE
-            // ======================================
-
-            const menuGeometry =
-                new THREE.PlaneGeometry(
-                    0.38,
-                    0.5
-                );
-
-            const menuMaterial =
-                new THREE.MeshPhongMaterial({
-                    opacity: 0,
-                    transparent: true
-                });
-
-            menuMesh = new THREE.Mesh(
-                menuGeometry,
-                menuMaterial
-            );
-
-            menuMesh.position.set(
-                0.4,
-                1,
-                -1
-            );
-
-            menuMesh.rotation.y = -Math.PI / 12;
-
-            scene.add(menuMesh);
-
-
-            // ======================================
-            // BOTÓN REINICIAR
-            // ======================================
-
-            const resetButton = makeButtonMesh(
-                0.34,
-                0.1,
-                0.01,
-                0x355c7d
-            );
-
-            const resetButtonText = createText(
-                'Reiniciar',
-                0.045
-            );
-
-            resetButton.add(resetButtonText);
-
-            resetButtonText.position.set(
-                0,
-                0,
-                0.0051
-            );
-
-            resetButton.position.set(
-                0,
-                -0.06,
-                0
-            );
-
-            menuMesh.add(resetButton);
-
-
-            // ======================================
-            // BOTÓN SALIR
-            // ======================================
-
-            const exitButton = makeButtonMesh(
-                0.34,
-                0.1,
-                0.01,
-                0xff0000
-            );
-
-            const exitButtonText = createText(
-                'Salir',
-                0.06
-            );
-
-            exitButton.add(exitButtonText);
-
-            exitButtonText.position.set(
-                0,
-                0,
-                0.0051
-            );
-
-            exitButton.position.set(
-                0,
-                -0.18,
-                0
-            );
-
-            menuMesh.add(exitButton);
-
-
-            // ======================================
-            // INSTRUCCIONES EN ESPAÑOL
-            // ======================================
-
-            instructionText = createText(
-                'Usa tus manos para mover los cubos.',
-                0.035
-            );
-
-            instructionText.position.set(
-                0,
-                1.6,
-                -0.6
-            );
-
-            scene.add(instructionText);
-
-
-            // MENSAJE DE SALIDA
-
-            const exitText = createText(
-                'Saliendo de realidad virtual...',
-                0.035
-            );
-
-            exitText.position.set(
-                0,
-                1.5,
-                -0.6
-            );
-
-            exitText.visible = false;
-
-            scene.add(exitText);
-
-
-            // ======================================
-            // CREAR 20 CUBOS INTERACTIVOS
-            // ======================================
-
-            for (let i = 0; i < 20; i++) {
-
-                const geometry =
-                    new THREE.BoxGeometry(
-                        0.15,
-                        0.15,
-                        0.15
-                    );
-
-                const material =
-                    new THREE.MeshLambertMaterial({
-                        color: 0xffffff
-                    });
-
-                const object = new THREE.Mesh(
-                    geometry,
-                    material
-                );
-
-                scene.add(object);
-
-                intersectables.push(object);
-
-                draggables.push({
-                    mesh: object,
-                    state: 'detached',
-                    originalParent: scene,
-                    attachedPointer: null
-                });
-
-            }
-
-            randomizeObjects();
-
-
-            // ======================================
-            // REGISTRAR BOTONES
-            // ======================================
-
-            intersectables.push(
-                menuMesh,
-                resetButton,
-                exitButton
-            );
-
-            buttons.push(
-
-                {
-                    mesh: resetButton,
-                    currState: 'none',
-                    prevState: 'none',
-
-                    action: function () {
-
-                        randomizeObjects();
-
-                    }
-                },
-
-                {
-                    mesh: exitButton,
-                    currState: 'none',
-                    prevState: 'none',
-
-                    action: function () {
-
-                        exitText.visible = true;
-
-                        setTimeout(function () {
-
-                            exitText.visible = false;
-
-                            const session =
-                                renderer.xr.getSession();
-
-                            if (session) {
-                                session.end();
-                            }
-
-                        }, 2000);
-
-                    }
-                }
-
-            );
-
-
-            window.addEventListener(
-                'resize',
-                onWindowResize
-            );
-
-        }
-
-
-        // ==========================================
-        // AJUSTAR VENTANA
-        // ==========================================
-
-        function onWindowResize() {
-
-            camera.aspect =
-                window.innerWidth / window.innerHeight;
-
-            camera.updateProjectionMatrix();
-
-            renderer.setSize(
-                window.innerWidth,
-                window.innerHeight
-            );
-
-        }
-
-
-        // ==========================================
-        // DISTRIBUIR CUBOS ALEATORIAMENTE
-        // ==========================================
-
-        function randomizeObjects() {
-
-            draggables.forEach(draggable => {
-
-                const object = draggable.mesh;
-
-                object.material.color.setHex(
-                    Math.floor(Math.random() * 0xffffff)
-                );
-
-                object.position.x =
-                    Math.random() * 2 - 1;
-
-                object.position.y =
-                    Math.random() * 2;
-
-                object.position.z =
-                    Math.random() * 2 - 1;
-
-                object.rotation.x =
-                    Math.random() * 2 * Math.PI;
-
-                object.rotation.y =
-                    Math.random() * 2 * Math.PI;
-
-                object.rotation.z =
-                    Math.random() * 2 * Math.PI;
-
-                object.scale.x =
-                    Math.random() + 0.5;
-
-                object.scale.y =
-                    Math.random() + 0.5;
-
-                object.scale.z =
-                    Math.random() + 0.5;
-
-            });
-
-        }
-
-
-        // ==========================================
-        // CALIBRAR MENÚ EN REALIDAD VIRTUAL
-        // ==========================================
-
-        function calibrateMenu() {
-
-            if (
-                needsCalibration &&
-                renderer.xr.getSession()
-            ) {
-
-                const xrCamera =
-                    renderer.xr.getCamera();
-
-                menuMesh.position.x =
-                    xrCamera.position.x + 0.4;
-
-                menuMesh.position.y =
-                    xrCamera.position.y;
-
-                menuMesh.position.z =
-                    xrCamera.position.z - 1;
-
-                needsCalibration = false;
-
-            }
-
-        }
-
-
-        // ==========================================
-        // ACTUALIZAR INSTRUCCIONES
-        // ==========================================
-
-        function updateInstructionText() {
-
-            instructionText.visible =
-                controllers.some(
-                    controller => controller.visible
-                );
-
-        }
-
-
-        // ==========================================
-        // ACTUALIZAR OBJETOS ARRASTRABLES
-        // ==========================================
-
-        function updateDraggables() {
-
-            draggables.forEach(draggable => {
-
-                const object = draggable.mesh;
-
-                switch (draggable.state) {
-
-                    case 'to-be-attached':
-
-                        draggable.attachedPointer
-                            .children[0]
-                            .attach(object);
-
-                        draggable.state = 'attached';
-
-                        break;
-
-
-                    case 'to-be-detached':
-
-                        draggable.originalParent.attach(
-                            object
-                        );
-
-                        draggable.state = 'detached';
-
-                        break;
-
-
-                    default:
-
-                        object.scale.set(
-                            1,
-                            1,
-                            1
-                        );
-
-                }
-
-            });
-
-        }
-
-
-        // ==========================================
-        // DETECTAR MANOS Y OBJETOS
-        // ==========================================
-
-        function updateHandRays() {
-
-            handPointers.forEach(hp => {
-
-                let distance = null;
-
-                let intersectingMesh = null;
-
-                intersectables.forEach(object => {
-
-                    const intersections =
-                        hp.intersectObject(
-                            object,
-                            false
-                        );
-
-                    if (
-                        intersections &&
-                        intersections.length > 0
-                    ) {
-
-                        if (
-                            distance === null ||
-                            intersections[0].distance < distance
-                        ) {
-
-                            distance =
-                                intersections[0].distance;
-
-                            intersectingMesh = object;
-
-                        }
-
-                    }
-
-                });
-
-
-                if (distance !== null) {
-
-                    hp.setCursor(distance);
-
-                    const button = buttons.find(
-                        button =>
-                            button.mesh === intersectingMesh
-                    );
-
-
-                    // DETECTAR BOTONES
-
-                    if (button !== undefined) {
-
-                        if (hp.isPinched()) {
-
-                            button.currState = 'pressed';
-
-                        } else if (
-                            button.currState !== 'pressed'
-                        ) {
-
-                            button.currState = 'hovered';
-
-                        }
-
-                    }
-
-
-                    // DETECTAR CUBOS
-
-                    const draggable = draggables.find(
-                        draggable =>
-                            draggable.mesh === intersectingMesh
-                    );
-
-                    if (draggable !== undefined) {
-
-                        intersectingMesh.scale.set(
-                            1.1,
-                            1.1,
-                            1.1
-                        );
-
-
-                        // SUJETAR CUBO
-
-                        if (hp.isPinched()) {
-
-                            if (
-                                !hp.isAttached() &&
-                                draggable.state !== 'attached'
-                            ) {
-
-                                draggable.state =
-                                    'to-be-attached';
-
-                                draggable.attachedPointer = hp;
-
-                                hp.setAttached(true);
-
-                            }
-
-                        } else {
-
-                            // SOLTAR CUBO
-
-                            if (
-                                hp.isAttached() &&
-                                draggable.state === 'attached'
-                            ) {
-
-                                draggable.state =
-                                    'to-be-detached';
-
-                                draggable.attachedPointer = null;
-
-                                hp.setAttached(false);
-
-                            }
-
-                        }
-
-                    }
-
-                } else {
-
-                    hp.setCursor(1.5);
-
-                }
-
-            });
-
-        }
-
-
-        // ==========================================
-        // ACTUALIZAR BOTONES INTERACTIVOS
-        // ==========================================
-
-        function updateButtons() {
-
-            buttons.forEach(button => {
-
-                if (button.currState === 'none') {
-
-                    button.mesh.scale.set(
-                        1,
-                        1,
-                        1
-                    );
-
-                } else {
-
-                    button.mesh.scale.set(
-                        1.1,
-                        1.1,
-                        1.1
-                    );
-
-                }
-
-
-                // EJECUTAR ACCIÓN
-
-                if (
-                    button.currState === 'pressed' &&
-                    button.prevState !== 'pressed'
-                ) {
-
-                    button.action();
-
-                }
-
-
-                button.prevState =
-                    button.currState;
-
-                button.currState = 'none';
-
-            });
-
-        }
-
-
-        // ==========================================
-        // ANIMACIÓN PRINCIPAL
-        // ==========================================
-
-        function animate() {
-
-            renderer.xr.updateCamera(camera);
-
-            calibrateMenu();
-
-            updateInstructionText();
-
-            updateDraggables();
-
-            updateHandRays();
-
-            updateButtons();
-
-            renderer.render(
-                scene,
-                camera
-            );
-
-        }
-
     </script>
 
 </body>
-
 </html>

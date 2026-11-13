@@ -1,0 +1,434 @@
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #444444;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            z-index: 10;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        #info a {
+            color: #ffff00;
+            font-weight: bold;
+            text-decoration: none;
+            pointer-events: auto;
+        }
+
+        #VRButton {
+            z-index: 20 !important;
+            font-family: Arial, sans-serif !important;
+        }
+
+
+/* ===================================================
+   REDISEÑO EDITORIAL - LABORATORIO VR 2026
+   =================================================== */
+
+.editorial-welcome {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    overflow-y: auto;
+    background: #f3f0e9;
+    color: #202626;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.editorial-welcome[hidden] {
+    display: none !important;
+}
+
+.editorial-layout {
+    max-width: 1200px;
+    min-height: 100%;
+}
+
+.editorial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 0;
+    border-bottom: 1px solid #d6d1c7;
+}
+
+.editorial-brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.editorial-brand strong {
+    font-weight: 800;
+}
+
+.editorial-brand-mark {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    background: #202626;
+    color: #f3f0e9;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.editorial-edition {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    color: #a44f32;
+}
+
+.editorial-hero {
+    padding-top: 86px;
+    padding-bottom: 100px;
+}
+
+.editorial-label {
+    color: #aa5234;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    margin-bottom: 28px;
+}
+
+.editorial-hero h1 {
+    font-size: clamp(54px, 6.5vw, 90px);
+    line-height: 1.04;
+    letter-spacing: -4px;
+    font-weight: 800;
+    color: #202626;
+    margin-bottom: 30px;
+}
+
+.editorial-hero h1 em {
+    color: #ad5639;
+    font-style: normal;
+}
+
+.editorial-description {
+    max-width: 550px;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #666b68;
+    margin-bottom: 34px;
+}
+
+.editorial-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+    padding: 17px 23px;
+    border: 1px solid #202626;
+    background: #202626;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    transition: background .2s, transform .2s;
+    cursor: pointer;
+}
+
+.editorial-button span {
+    font-size: 23px;
+    line-height: 1;
+}
+
+.editorial-button:hover {
+    background: #ad5639;
+    border-color: #ad5639;
+    transform: translateY(-2px);
+}
+
+.editorial-button:focus-visible {
+    outline: 3px solid #ad5639;
+    outline-offset: 4px;
+}
+
+.editorial-compatibility {
+    font-size: 12px;
+    margin-top: 22px;
+    color: #757a76;
+}
+
+.editorial-separator {
+    padding: 0 8px;
+    color: #b6aca0;
+}
+
+.editorial-feature {
+    min-height: 440px;
+    background: #252b2a;
+    color: #f3f0e9;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.editorial-feature-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #c4c6bd;
+}
+
+.editorial-shapes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-height: 180px;
+}
+
+.editorial-shape {
+    display: block;
+    width: 67px;
+    height: 67px;
+    background: #c5a68b;
+}
+
+.editorial-shape.cube {
+    transform: rotate(-16deg);
+    background: #c7a88c;
+    box-shadow: 9px 9px 0 #897562;
+}
+
+.editorial-shape.sphere {
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 30%,
+        #f1d9b6,
+        #ac6b49
+    );
+}
+
+.editorial-shape.pyramid {
+    width: 0;
+    height: 0;
+    background: none;
+    border-left: 43px solid transparent;
+    border-right: 43px solid transparent;
+    border-bottom: 83px solid #9ea9a1;
+}
+
+.editorial-feature-bottom {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    border-top: 1px solid #555b56;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.editorial-feature-bottom strong {
+    font-size: 78px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -5px;
+}
+
+.editorial-feature-bottom p {
+    margin: 0;
+    font-size: 13px;
+    color: #c6c7bf;
+    line-height: 1.8;
+}
+
+.editorial-guide {
+    border-top: 1px solid #d6d1c7;
+    padding-top: 45px;
+    padding-bottom: 75px;
+}
+
+.editorial-section-heading span {
+    color: #aa5234;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.editorial-section-heading h2 {
+    margin-top: 18px;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #202626;
+}
+
+.editorial-guide-description {
+    max-width: 310px;
+    color: #717773;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.editorial-instructions {
+    border-top: 1px solid #d6d1c7;
+}
+
+.editorial-instruction {
+    display: flex;
+    align-items: baseline;
+    gap: 23px;
+    padding: 17px 5px;
+    border-bottom: 1px solid #d6d1c7;
+}
+
+.editorial-instruction span {
+    font-size: 12px;
+    font-weight: 800;
+    color: #aa5234;
+}
+
+.editorial-instruction p {
+    margin: 0;
+    font-size: 14px;
+    color: #454c48;
+}
+
+.editorial-footer {
+    background: #202626;
+    color: #f3f0e9;
+    padding: 36px;
+    margin-bottom: 30px;
+}
+
+.editorial-footer-main {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    padding-bottom: 32px;
+}
+
+.editorial-footer-main > div {
+    min-width: 0;
+}
+
+.editorial-footer-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    color: #c28c71;
+    margin-bottom: 10px;
+}
+
+.editorial-footer-main strong {
+    display: block;
+    font-size: 13px;
+    line-height: 1.8;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.editorial-footer-bottom {
+    border-top: 1px solid #464c49;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #b4b8b0;
+}
+
+@media (max-width: 991px) {
+    .editorial-hero {
+        padding-top: 55px;
+        padding-bottom: 65px;
+    }
+
+    .editorial-feature {
+        min-height: 340px;
+    }
+}
+
+@media (max-width: 600px) {
+    .editorial-header {
+        padding: 20px 0;
+    }
+
+    .editorial-brand {
+        letter-spacing: 1px;
+        font-size: 10px;
+    }
+
+    .editorial-edition {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .editorial-hero h1 {
+        font-size: 46px;
+        letter-spacing: -2px;
+    }
+
+    .editorial-description {
+        font-size: 15px;
+    }
+
+    .editorial-button {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .editorial-footer {
+        padding: 25px 20px;
+    }
+
+    .editorial-footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .editorial-footer-bottom {
+        flex-direction: column;
+    }
+
+    .editorial-instruction {
+        gap: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .editorial-button {
+        transition: none;
+    }
+}
